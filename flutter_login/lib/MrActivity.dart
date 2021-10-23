@@ -59,18 +59,34 @@ class _MrActivityPageState extends State<MrActivityPage> {
   }
   @override
   Widget build(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            stops: [0.1, 0.5, 0.7, 0.9],
+            colors: [
+              Colors.yellow[800],
+              Colors.white,
+              Colors.white,
+              Colors.yellow[400],
+            ],
+          ),
+        ),
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(
+    child: Scaffold(
+        backgroundColor: Colors.transparent,
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
           title: Text(widget.title),
           leading: IconButton(icon: Image.asset('assets/images/image003.png'),),
+
         ),
 
         body:
@@ -78,6 +94,7 @@ class _MrActivityPageState extends State<MrActivityPage> {
         // in the middle of the parent.
 
         new Column(
+
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
           // children horizontally, and tries to be as tall as its parent.
@@ -97,80 +114,96 @@ class _MrActivityPageState extends State<MrActivityPage> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
 
-            children: <Widget>[
-              SizedBox(
-                width: 2000.0,
-                height: 20.0,
-              ),
-              new Image.asset(
-                'assets/images/image003.png',
-                fit:BoxFit.fill,
-              ),
-              SizedBox(
-                width: 2000.0,
-                height: 20.0,
-              ),
-              new Image.asset(
-                  'assets/images/jusco_line.png',
-                  fit:BoxFit.fill
-              ),
-              SizedBox(
-                width: 2000.0,
-                height: 20.0,
-              ),
-              new Container(
-                  child: Text('Photo Meter Billing',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 25),)
-              ),
-              SizedBox(
-                width: 2000.0,
-                height: 20.0,
-              ),
-              new Container(
-                child: new TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Username',
-                      hintText: 'Enter Username'),
-                ),
-              ),
-              SizedBox(
-                width: 2000.0,
-                height: 20.0,
-              ),
-              new Container(
-                child: new TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Password',
-                      hintText: 'Enter Password'),
-                ),
-              ),
-              SizedBox(
-                width: 2000.0,
-                height: 20.0,
-              ),
-              Container(
-                height: 50,
-                width: 250,
-                decoration: BoxDecoration(
-                    color: Colors.blue, borderRadius: BorderRadius.circular(20)),
-                child: FlatButton(
-                  onPressed: () {
 
-                    Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => MrActivity()),);
-                  },
-                  child: Text(
-                    'Login',
-                    style: TextStyle(color: Colors.white, fontSize: 25),
-                  ),
-                ),
+            children: <Widget>[
+              ButtonBar(
+                children: [
+                  Container(
+                    width: 120.0,
+                    height: 200.0,
+                    padding: EdgeInsets.only(top: 170.0),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/conssearch.png')
+
+                      ),
+                    ),
+                    child: FlatButton(
+                      shape: RoundedRectangleBorder(
+                           borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                           child: new Text("Consumer Search"),
+                            onPressed: () {
+                                Navigator.push(
+                                  context, MaterialPageRoute(builder: (context) => MrActivity()),);
+                              },
               ),
-              /* Container(),
-            Container()*/
-            ]    )
-    );
+                  ),
+                  Container(
+                    width: 120.0,
+                    height: 200.0,
+                    padding: EdgeInsets.only(top: 170.0),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/duplicate_bill.png')
+                      ),
+                    ),
+                    child: FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                      child: new Text("Duplicate Bill"),
+                      onPressed: () {
+                        Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => MrActivity()),);
+                      },
+                    ),
+                  ),
+
+                ],),
+              ButtonBar(
+                children: [
+                  Container(
+                    width: 120.0,
+                    height: 200.0,
+                    padding: EdgeInsets.only(top: 130.0),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/reports2.png')
+                      ),
+                    ),
+                    child: FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                      child: new Text("Reports"),
+                      onPressed: () {
+                        Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => MrActivity()),);
+                      },
+                    ),
+                  ),
+                  Container(
+                    width: 120.0,
+                    height: 200.0,
+                    padding: EdgeInsets.only(top: 150.0),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/data_upload_1.png')
+                      ),
+                    ),
+                    child: FlatButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(30.0))),
+                      child: new Text("Upload Data"),
+                      onPressed: () {
+                        Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => MrActivity()),);
+
+                      },
+                    ),
+                  ),
+
+                ],),
+
+   ] ),
+    ),);
   }
 }

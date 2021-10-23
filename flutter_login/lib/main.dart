@@ -1,6 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+
+
 import 'MrActivity.dart';
+
 List<String> imagePaths = [
   "assets/images/image003.png",
   "assets/images/jusco_line.png",
@@ -10,6 +13,7 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -46,14 +50,46 @@ class MyHomePage extends StatefulWidget {
   // always marked "final".
 
   final String title;
+  String _macAddress="unKnown";
+  String _imeinumber="unKnown";
+
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  @override
+  void initState()
+  {
+    super.initState();
+    initPlatformState();
 
+  }
+  Future <void> initPlatformState() async {
+    String macAddress;
+    String imeinumber;
+  /*  try{
+      macAddress= await GetMac.macAddress();
+    }*/
+  }
+  int _counter = 0;
+  TextEditingController Username = TextEditingController();
+  TextEditingController password = TextEditingController();
+
+  String printText (String text) {
+    print(text);
+    return 'Hello $text';
+  }
+  String Validate_login(String Username,String pwd) {
+
+    if ((Username == "admin") && (pwd == "1611")) {
+    }
+    else if((Username == "user") && (pwd == "1234")) {
+      Navigator.push(
+        context, MaterialPageRoute(builder: (context) => MrActivity()),);
+    }
+  }
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -67,13 +103,27 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            stops: [0.1, 0.5,  0.9],
+            colors: [
+              Colors.lightBlue[800],
+              Colors.white,
+              Colors.lightGreen[400],
+            ],
+          ),
+        ),
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(
+    child: Scaffold(
+        backgroundColor: Colors.transparent,
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
@@ -82,10 +132,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
 
       body:
+
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
+      new SingleChildScrollView(
 
-      new Column(
+      child: new Column(
           // Column is also a layout widget. It takes a list of children and
           // arranges them vertically. By default, it sizes itself to fit its
           // children horizontally, and tries to be as tall as its parent.
@@ -135,7 +187,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
      new Container(
        child: new TextField(
-       obscureText: true,
+       obscureText: false,
+         controller: Username,
         decoration: InputDecoration(
             border: OutlineInputBorder(),
             labelText: 'Username',
@@ -149,6 +202,7 @@ class _MyHomePageState extends State<MyHomePage> {
             new Container(
               child: new TextField(
                 obscureText: true,
+                controller: password,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Password',
@@ -167,8 +221,9 @@ class _MyHomePageState extends State<MyHomePage> {
               child: FlatButton(
                 onPressed: () {
 
-                 Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => MrActivity()),);
+                /* Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => MrActivity()),);*/
+                  Validate_login(Username.text, password.text);
                 },
                 child: Text(
                   'Login',
@@ -194,17 +249,24 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
 
               children: <Widget>[
-            new Container(
-                child: Text("© 2018&#8211;19 Vaibhu Infratech India Pvt Ltd",style: TextStyle(fontWeight: FontWeight.normal,fontSize: 12),)
+                Expanded(
+                  flex: 2,
+                  child: new Container(
+                child: Text("© 2018-19 Vaibhu Infratech India Pvt Ltd",style: TextStyle(fontWeight: FontWeight.normal,fontSize: 12),)
             ),
-
-                new Container(
-                    child: Text("                     Ver 1234",style: TextStyle(fontWeight: FontWeight.normal,fontSize: 12),)
                 ),
-              ]),
+              Expanded(
+                flex: 1,
+               child: new Container(
+                     child: Text("Ver 1234" ,style: TextStyle(fontWeight: FontWeight.normal,fontSize: 12),)
+                 // child: Text(printText('World')),
+                ),)
+              ])
             /* Container(),
             Container()*/
+
   ]    )
+      )    )
     );
   }
 }
